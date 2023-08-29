@@ -102,7 +102,7 @@ namespace VivDOS
             }
             else if (input == "Help")
             {
-                //Console.WriteLine("Currently there are 55 commands");
+                //Console.WriteLine("Currently there are 55 commands");                   Console.WriteLine(File.ReadAllText(@"0:\VivDOS\Help.vpt"));
             }
             else
             {
