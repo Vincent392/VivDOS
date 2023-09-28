@@ -13,6 +13,7 @@ namespace VivDOS
         {
             Sys.FileSystem.VFS.VFSManager.RegisterVFS(fs);
             //Console.WriteLine("Cosmos booted successfully. Type a line of text to get it echoed back.");
+          if (!File.Exists("0:\\VivDOS\\temp\\setupreboot.tmp")) {
             if (!File.Exists("0:\\VivDOS\\Sys.VDS"))
             {
                 Setup1();
@@ -20,6 +21,9 @@ namespace VivDOS
             else if (!File.Exists("0:\\Users\\Users.VDDB"))
             {
                 oobe();
+            }
+          } else {
+               Setup1();
             }
             Console.Clear();
             Console.WriteLine("VivDOS v1.0.0"); //FF9 and Portal are not the same!
@@ -104,6 +108,12 @@ namespace VivDOS
             {
                 //Console.WriteLine("Currently there are 55 commands");                   Console.WriteLine(File.ReadAllText(@"0:\VivDOS\Help.vpt"));
             }
+            else if (input == "Reboot to setup")
+            {
+             if (!File.Exists("0:\\VivDOS\\temp\\setupreboot.tmp")) {
+             fs.CreateDirectory("0:\\VivDOS\\temp\\");
+             fs.CreateFile("0:\\VivDOS\\temp\\setupreboot.tmp");
+             Cosmos.System.Power.Reboot();
             else
             {
                 Console.WriteLine("ERR VI1: COMMAND NOT FOUND");
@@ -161,7 +171,7 @@ namespace VivDOS
             Console.WriteLine("To quit setup press Q");
             Console.WriteLine("=============================================================================================");
             var input = Console.ReadLine();
-            if (input == "R") { fixsys(); } else if (input == "S") { setupsys(); } else if (input == "Q") { Cosmos.System.Power.Shutdown(); } else { Setup1(); }
+            if (input == "R") { fixsys(); } else if (input == "S") { setupsys(); } else if (input == "Q") { File.Delete("0:\\VivDOS\\temp\\setupreboot.tmp"); Cosmos.System.Power.Shutdown(); } else { Setup1(); }
         }
 
         protected void setupsys()
@@ -200,6 +210,7 @@ namespace VivDOS
             Console.WriteLine("=============================================================================================");
             fs.CreateDirectory("0:\\VivDOS\\");
             fs.CreateDirectory("0:\\VivDOS\\SRC");
+            fs.CreateDirectory("0:\\VivDOS\\tmep\\");
             fs.CreateFile("0:\\VivDOS\\System.VVDB");
             fs.CreateFile("0:\\VivDOS\\Sys.VDS");
             fs.CreateFile("0:\\VivDOS\\Help.vpt");
@@ -287,6 +298,7 @@ namespace VivDOS
             Console.WriteLine("fixing system...");
             fs.CreateDirectory("0:\\VivDOS\\");
             fs.CreateDirectory("0:\\VivDOS\\SRC");
+            fs.CreateDirectory("0:\\VivDOS\\tmep\\");
             fs.CreateFile("0:\\VivDOS\\System.VDDB");
             fs.CreateFile("0:\\VivDOS\\Sys.VDS");
             fs.CreateFile("0:\\VivDOS\\SysFiles.VDDB");
