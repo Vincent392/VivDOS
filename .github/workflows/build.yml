@@ -35,6 +35,7 @@ jobs:
     - name: Install COSMOS Dev Kit (2/2)
       run: |
           cd D:\a\VivDOS-NET\VivDOS-NET\Cosmos
+          dir
           install-VS2022.cmd
       shell: cmd
 
