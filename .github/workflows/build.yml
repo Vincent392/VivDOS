@@ -1,4 +1,4 @@
-name: Build VS
+name: Build Debug
 
 on:
   push:
@@ -20,16 +20,27 @@ jobs:
         vs-version: '17.6' # Visual Studio 2022 version 17.6
         include-vcbuild: true
 
-#    - name: Force .NET 5
- #     uses: actions/setup-dotnet@v1
-  #    with:
-   #     dotnet-version: 5.0.17
+    - name: Install .NET 6 SDK
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+
+    - name: Install COSMOS User Kit
+      run: |
+        git clone https://github.com/CosmosOS/Cosmos.git --branch Userkit --depth 1
+        cd Cosmos
+        .\install-VS2022.cmd
+      shell: pwsh
 
     - name: Restore NuGet packages
       run: nuget restore VivDOS.sln
 
     - name: Check directory
       run: dir
+
+#    - name: Build the COSMOS Kernel
+#      run: dotnet build --configuration Release
+#      shell: pwsh
 
     - name: Build solution
       run: msbuild /p:Configuration=Release VivDOS.sln
