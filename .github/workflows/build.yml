@@ -33,11 +33,14 @@ jobs:
       shell: pwsh
     
     - name: Install COSMOS Dev Kit (2/2)
-      run:  install-VS2022.cmd
+      run: |
+          cd D:\a\VivDOS-NET\VivDOS-NET\Cosmos
+          install-VS2022.cmd
       shell: cmd
 
     - name: Restore NuGet packages
       run: nuget restore VivDOS.sln
+      shell: pwsh
 
     - name: Check directory
       run: dir
