@@ -36,7 +36,7 @@ jobs:
       run: |
           cd D:\a\VivDOS-NET\VivDOS-NET\Cosmos
           dir
-          install-VS2022.cmd
+          install-VS2022.bat
       shell: cmd
 
     - name: Restore NuGet packages
