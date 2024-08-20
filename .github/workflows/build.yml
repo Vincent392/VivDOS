@@ -28,5 +28,8 @@ jobs:
     - name: Restore NuGet packages
       run: nuget restore VivDOS.sln
 
+    - name: Check directory
+      run: dir
+
     - name: Build solution
       run: msbuild /p:Configuration=Release VivDOS.sln
