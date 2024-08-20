@@ -27,7 +27,7 @@ jobs:
 
     - name: Install COSMOS User Kit
       run: |
-        git clone https://github.com/CosmosOS/Cosmos.git --branch Userkit --depth 1
+        git clone https://github.com/CosmosOS/Cosmos.git --depth 1
         cd Cosmos
         .\install-VS2022.cmd
       shell: pwsh
