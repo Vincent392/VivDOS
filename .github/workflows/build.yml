@@ -25,13 +25,16 @@ jobs:
       with:
         dotnet-version: 6.0.x
 
-    - name: Install COSMOS User Kit
+    - name: Install COSMOS Dev Kit (1/2)
       run: |
         git clone https://github.com/CosmosOS/Cosmos.git --depth 1
         cd Cosmos
         dir
-        .\install-VS2022.cmd
       shell: pwsh
+    
+    - name: Install COSMOS Dev Kit (2/2)
+      run:  install-VS2022.cmd
+      shell: cmd
 
     - name: Restore NuGet packages
       run: nuget restore VivDOS.sln
