@@ -1,0 +1,32 @@
+name: Build VS
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install Visual Studio Build Tools
+      uses: microsoft/setup-msbuild@v1
+      with:
+        vs-version: '17.6' # Visual Studio 2022 version 17.6
+        include-vcbuild: true
+
+#    - name: Force .NET 5
+ #     uses: actions/setup-dotnet@v1
+  #    with:
+   #     dotnet-version: 5.0.17
+
+    - name: Restore NuGet packages
+      run: nuget restore NewRTEngine.sln
+
+    - name: Build solution
+      run: msbuild /p:Configuration=Release VivDOS.sln
